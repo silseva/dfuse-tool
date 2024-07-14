@@ -29,9 +29,7 @@ def parse(file, dump_images=False):
   for t in range(prefix['targets']):
     tprefix, data  = consume('<6sBI255s2I',data,'signature altsetting named name size elements')
     tprefix['num'] = t
-    if tprefix['named']:
-      tprefix['name'] = cstring(tprefix['name'])
-    else:
+    if not tprefix['named']:
       tprefix['name'] = ''
     print ('%(signature)s %(num)d, alt setting: %(altsetting)s, name: "%(name)s", size: %(size)d, elements: %(elements)d' % tprefix)
     tsize = tprefix['size']
